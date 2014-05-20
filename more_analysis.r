@@ -1,3 +1,4 @@
+# header
 library(psych)
 library(randomForest)
 dat = read.csv("/users/o/ecoach/data/W14_data/end_of_semester/STATS250_W14_Full_Data_Set.csv")
