@@ -5,7 +5,7 @@ dat = read.csv("/users/o/ecoach/data/W14_data/end_of_semester/STATS250_W14_Full_
 
 
 #################################################
-#    Resource Usage Proportion Statistics       #
+#    Resource Usage Proportionn Statistics      #
 #################################################
 
 bad.vars = c(1,14:27,64,65,67,238,255,262,271)
@@ -29,6 +29,7 @@ message.names =              c("msg.1.I", "msg.2.I", "msg.3.I",
 							   "msg.22.I", "msg.23.I", "msg.24.I",
 							   "msg.25.I", "msg.26.I")
 #dat$userness = -26 #since there are 26 messages the lowest number is the sum of 26, -1's
+
 dat$ecoach.userness = rowSums(dat[,message.names])
 
 good.vars = c("Final.Course.Grade", "Reg_GPA","Reg_Acad_Level","Subject_Interest","Confidence",
