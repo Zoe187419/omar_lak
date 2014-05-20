@@ -5,7 +5,7 @@ dat = read.csv("/users/o/ecoach/data/W14_data/end_of_semester/STATS250_W14_Full_
 
 
 #################################################
-#    Resource Usage Proportion Statistics       #
+#    resource Usage Proportion Statistics       #
 #################################################
 
 bad.vars = c(1,14:27,64,65,67,238,255,262,271)
