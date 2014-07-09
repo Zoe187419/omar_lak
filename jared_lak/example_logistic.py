@@ -37,19 +37,18 @@ print dummy_ranks.head()
 
 cols_to_keep = ['admit', 'gre', 'gpa']
 data = df[cols_to_keep].join(dummy_ranks.ix[:, 'prestige_2':])
-print data.head()
 data['intercept'] = 1.0
+print data.head()
 
 train_cols = data.columns[1:]
-# Index([gre, gpa, prestige_2, prestige_3, prestige_4], dtype=object)
-exit()
- 
-logit = sm.Logit(data['admit'], data[train_cols])
+print train_cols
  
 # fit the model
+logit = sm.Logit(data['admit'], data[train_cols])
 result = logit.fit()
 
 print result.summary()
+import pdb; pdb.set_trace() 
 print result.conf_int()
 print data.head()
 print np.exp(result.params)
