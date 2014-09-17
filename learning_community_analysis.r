@@ -7,7 +7,8 @@ options(digits = 3)
 set.seed(80)
 sessionInfo()
 
-dat = read.csv("/users/o/google drive/LAK/omar_data.csv")
+#dat = read.csv("/users/o/google drive/LAK/omar_data.csv")
+dat = read.csv("../data_lak_2015/learning_communities.csv")
 summary(dat)
 
 ######################################
