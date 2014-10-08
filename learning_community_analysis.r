@@ -18,6 +18,7 @@ N = 1000
 temp = na.omit(dat)
 tg = temp[temp$in_treatment == TRUE,]
 cg = temp[temp$in_treatment == FALSE,]
+
 beta.matrix = matrix(NA, nrow = N, ncol = 24) #22 in the number of vars when using dummy variables in the GLM below 
 ppty.matrix = matrix(NA, nrow = nrow(temp), ncol = N)
 model.vars = c("sex","ethnic","act","Init.Home.Acad.Group.Descrsh","in_treatment",
@@ -31,15 +32,13 @@ for(i in 1:N){
 	
 	#beta.matrix[i,]       = model$coefficients
 	ppty.matrix[select,i] = model$fitted.values
-
 }
 temp$ppty.score = rowMeans(ppty.matrix,  na.rm = TRUE)
-t.test(ppty.score ~ in_treatment, data = temp)
+print(t.test(ppty.score ~ in_treatment, data = temp))
 boxplot(ppty.score ~ in_treatment, data = temp)
 
 fm.1.1 = fullmatch(in_treatment ~ ppty.score, data = temp,
                    within = caliper(match_on(in_treatment ~ ppty.score, data = temp), width = 0.15))
-								                                                      
 summary(fm.1.1)
 
 pair.match = pairmatch(in_treatment ~ ppty.score, data = temp,
