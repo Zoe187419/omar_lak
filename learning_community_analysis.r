@@ -50,7 +50,6 @@ pair.match = pairmatch(
 summary(pair.match)
 
 variable.balance  = xBalance(
-    # QUESTION: is . same as a+b+c+...+all ?
     in_treatment ~ .,
     strata = list(
         unstratified_comparison = NULL, 

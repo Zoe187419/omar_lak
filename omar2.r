@@ -34,6 +34,7 @@ temp = rbind(low.data,high.data) # concat the lows back on... effectively sorted
 
 # build the prognostic score only on control data
 # QUESTION: what if the control group is small-ish?
+# QUESTION: is . same as a+b+c+...+all ?
 if(!file.exists('forest1.Rdata')) {
     cont.mod.rf = randomForest(
         CUM_GPA ~., # http://stats.stackexchange.com/questions/10712/what-is-the-meaning-of-the-dot-in-r
@@ -156,6 +157,9 @@ pvals.math = xBalance(mathfmla, strata = fm.1.3, data = temp, report = c("p.valu
 names(pvals.math) = est.seq
 est.seq[pvals.math == max(pvals.math)]
 range(est.seq[pvals.math >= 0.05])
+
+# pull out the matches
+# temp[which(fm.1.1!='NA'),]
 
 stop('exit')
 
