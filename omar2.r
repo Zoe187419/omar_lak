@@ -33,7 +33,7 @@ temp = rbind(low.data,high.data) # concat the lows back on... effectively sorted
 #print(length(which(temp$treat == 0)))
 
 # build the prognostic score only on control data
-# what if the control group is small-ish?
+# QUESTION: what if the control group is small-ish?
 if(!file.exists('forest1.Rdata')) {
     cont.mod.rf = randomForest(
         CUM_GPA ~., # http://stats.stackexchange.com/questions/10712/what-is-the-meaning-of-the-dot-in-r
@@ -50,9 +50,9 @@ if(!file.exists('forest1.Rdata')) {
 vars = setdiff(colnames(temp), c("CUM_GPA"))
 
 # propensity score model
-# when treatment variable is continuous, would you ignore votes and use expectations
+# QUESTION: when treatment variable is continuous, would you ignore votes and use expectations
 # the same way that prognostics are calculated? 
-# if there were more than 2 factors, would the votes return 3 columns?
+# QUESTION: if there were more than 2 factors, would the votes return 3 columns?
 if(!file.exists('forest2.Rdata')) {
     ppty.mod.rf = randomForest(
         factor(treat)~.,
