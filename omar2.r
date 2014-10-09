@@ -1,3 +1,4 @@
+rm(list=ls())
 options(width=Sys.getenv("COLUMNS")) 
 library(optmatch)
 library(RItools)
