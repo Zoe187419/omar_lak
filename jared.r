@@ -51,21 +51,6 @@ predictors = c('Reg_Gender', 'Reg_GPA')
 prog_formula = paste0(dep_var_col, ' ~ ', paste(predictors, collapse=' + ' ) )
 prop_formula = paste0('factor(', treat_col, ') ~ ', paste(predictors, collapse=' + ' ) )
 
-# config mcdb ecoach
-version = 'ec'
-ifile = "../data_lak_2015/mcdb2.csv"
-treat_col = 'usage.ratio_xxx'
-treat_val = 'True'
-control_val = 'False'
-dep_var_col = 'Total.Points'
-# QUESTION: do binary trees work to predict continuous variables?
-# if so is it just by making it into lots of categorical bins?
-# QUESTION: is it ok to use data available only for treatment
-# when predicting the propensity
-predictors = c('Reg_Gender', 'Reg_GPA', 'Reg_Acad_Level')
-prog_formula = paste0(dep_var_col, ' ~ ', paste(predictors, collapse=' + ' ) )
-prop_formula = paste0('factor(', treat_col, ') ~ ', paste(predictors, collapse=' + ' ) )
-
 # config problem roulette exam 1
 version = 'pr1'
 ifile = "../data_lak_2015/pr_lak_exam1.csv"
@@ -90,6 +75,21 @@ dep_var_col = 'CUM_GPA'
 # QUESTION: do binary trees work to predict continuous variables?
 # if so is it just by making it into lots of categorical bins?
 predictors = c('Sex', 'ethnic', 'citizen', 'parents', 'income')
+prog_formula = paste0(dep_var_col, ' ~ ', paste(predictors, collapse=' + ' ) )
+prop_formula = paste0('factor(', treat_col, ') ~ ', paste(predictors, collapse=' + ' ) )
+
+# config mcdb ecoach
+version = 'ec'
+ifile = "../data_lak_2015/mcdb2.csv"
+treat_col = 'usage.ratio_xxx'
+treat_val = 'True'
+control_val = 'False'
+dep_var_col = 'Total.Points'
+# QUESTION: do binary trees work to predict continuous variables?
+# if so is it just by making it into lots of categorical bins?
+# QUESTION: is it ok to use data available only for treatment
+# when predicting the propensity
+predictors = c('Reg_Gender', 'Reg_GPA', 'Reg_Acad_Level')
 prog_formula = paste0(dep_var_col, ' ~ ', paste(predictors, collapse=' + ' ) )
 prop_formula = paste0('factor(', treat_col, ') ~ ', paste(predictors, collapse=' + ' ) )
 
@@ -169,8 +169,8 @@ for(ii in names(table(fm.1.1)))
     pairs = names(fm.1.1[which(ii == fm.1.1)])
     pair1 = temp[pairs[1],]
     pair2 = temp[pairs[2],]
-    pair1$group = ii
-    pair2$group = ii
+    pair1$group = paste0(ii,'_a')
+    pair2$group = paste0(ii, '_a')
     pairings = rbind(pairings, pair1)
     pairings = rbind(pairings, pair2)
 }
