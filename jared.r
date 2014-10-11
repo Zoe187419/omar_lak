@@ -65,19 +65,6 @@ predictors = c('Reg_Gender', 'Reg_GPA')
 prog_formula = paste0(dep_var_col, ' ~ ', paste(predictors, collapse=' + ' ) )
 prop_formula = paste0('factor(', treat_col, ') ~ ', paste(predictors, collapse=' + ' ) )
 
-# config learning communities
-version = 'lc'
-ifile = "../data_lak_2015/learning_communities2.csv"
-treat_col = 'treat'
-treat_val = 1
-control_val = 0
-dep_var_col = 'CUM_GPA'
-# QUESTION: do binary trees work to predict continuous variables?
-# if so is it just by making it into lots of categorical bins?
-predictors = c('Sex', 'ethnic', 'citizen', 'parents', 'income')
-prog_formula = paste0(dep_var_col, ' ~ ', paste(predictors, collapse=' + ' ) )
-prop_formula = paste0('factor(', treat_col, ') ~ ', paste(predictors, collapse=' + ' ) )
-
 # config mcdb ecoach
 version = 'ec'
 ifile = "../data_lak_2015/mcdb2.csv"
@@ -90,6 +77,19 @@ dep_var_col = 'Total.Points'
 # QUESTION: is it ok to use data available only for treatment
 # when predicting the propensity
 predictors = c('Reg_Gender', 'Reg_GPA', 'Reg_Acad_Level')
+prog_formula = paste0(dep_var_col, ' ~ ', paste(predictors, collapse=' + ' ) )
+prop_formula = paste0('factor(', treat_col, ') ~ ', paste(predictors, collapse=' + ' ) )
+
+# config learning communities
+version = 'lc'
+ifile = "../data_lak_2015/learning_communities2.csv"
+treat_col = 'treat'
+treat_val = 1
+control_val = 0
+dep_var_col = 'CUM_GPA'
+# QUESTION: do binary trees work to predict continuous variables?
+# if so is it just by making it into lots of categorical bins?
+predictors = c('Sex', 'ethnic', 'citizen', 'parents', 'income')
 prog_formula = paste0(dep_var_col, ' ~ ', paste(predictors, collapse=' + ' ) )
 prop_formula = paste0('factor(', treat_col, ') ~ ', paste(predictors, collapse=' + ' ) )
 
