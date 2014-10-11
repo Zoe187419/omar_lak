@@ -14,9 +14,27 @@ predictors = c('Reg_GPA')
 predictors = c('Reg_Gender')
 predictors = c('Reg_Gender', 'Reg_GPA', 'Reg_Acad_Level')
 
+# config learning communities
+version = 'lc'
+ifile = 'lc_pairs.csv'
+treat_col = 'treat'
+pairs_col = 'group'
+treat_val = 1
+control_val = 0
+predictors = c('Sex', 'ethnic', 'citizen', 'parents', 'income')
+
+# config problem roulette exam 1
+version = 'pr1'
+ifile = 'pr1_pairs.csv'
+treat_col = 'tried_xxx'
+pairs_col = 'group'
+treat_val = 'True'
+control_val = 'False'
+predictors = c('Reg_Gender', 'Reg_GPA')
+
 idata = read.csv(ifile)
 temp = idata
-#cat('sanity', table(as.character(table(temp[[pairs_col]]))), '\n')  # validate these are all pairs
+cat('sanity', table(as.character(table(temp[[pairs_col]]))), '\n')  # validate these are all pairs
 
 treatment = temp[which(temp[[treat_col]] == treat_val),]
 control = temp[which(temp[[treat_col]] == control_val),]
@@ -26,37 +44,28 @@ control = temp[which(temp[[treat_col]] == control_val),]
 par(mfrow=c(length(predictors),3))
 for(ii in c(1:length(predictors)))
 {
-    #control_xvals = names(table(control[[predictors[ii]]]))
-    #control_yvals = as.numeric(table(control$Reg_GPA))
-    #treatment_xvals = names(table(treatment$Reg_GPA))
-    #treatment_yvals = as.numeric(table(treatment$Reg_GPA))
-    if(is.numeric(control[[predictors[ii]]])) {
-        control_xvals = as.numeric(names(table(control[[predictors[ii]]])))
-        control_yvals = as.numeric(table(control[[predictors[ii]]]))
-        treatment_xvals = as.numeric(names(table(treatment[[predictors[ii]]])))
-        treatment_yvals = as.numeric(table(treatment[[predictors[ii]]]))
-    }
-    else {
-        control_xlabels = names(table(control[[predictors[ii]]]))
-        control_xvals = c(1:length(control_xlabels)) 
-        control_yvals = as.numeric(table(control[[predictors[ii]]]))
-        treatment_xlabels = names(table(treatment[[predictors[ii]]]))
-        treatment_xvals = c(1:length(treatment_xlabels))
-        treatment_yvals = as.numeric(table(treatment[[predictors[ii]]]))
-    }
+    control_xlabels = names(table(control[[predictors[ii]]]))
+    control_xvals = c(1:length(control_xlabels)) 
+    control_yvals = as.numeric(table(control[[predictors[ii]]]))
+    treatment_xlabels = names(table(treatment[[predictors[ii]]]))
+    treatment_xvals = c(1:length(treatment_xlabels))
+    treatment_yvals = as.numeric(table(treatment[[predictors[ii]]]))
+
     # dot data
-    ymax = max(control_yvals)
-    ymin = min(control_yvals)
-    plot(x=control_xvals, y=control_yvals, type='o', ylim=c(ymin, ymax+0.1*ymax), lty=1)
+    ymax = max(c(control_yvals, treatment_yvals))
+    ymin = min(c(control_yvals, treatment_yvals))
+    plot(x=control_xvals, y=control_yvals, type='o', ylim=c(ymin, ymax+0.1*ymax), lty=1, xlab=predictors[[ii]], ylab='frequency', main='Frequency Line Graph', xaxt='n')
+    axis(1, at=control_xvals, labels=control_xlabels, col.axis="black", las=0)
     lines(x=treatment_xvals, y=treatment_yvals, type='o', lty=2, pch=17)
     # smoothed density
     control_density = density(as.numeric(control[[predictors[ii]]]))
     treat_density = density(as.numeric(treatment[[predictors[ii]]]))
     ymax = max(c(treat_density$y, control_density$y))
-    plot(control_density, ylim=c(0, ymax+0.1*ymax), lty=1)
+    plot(control_density, ylim=c(0, ymax+0.1*ymax), lty=1, xlab=predictors[[ii]], ylab='frequency', main='Smoothed Line Graph')
     lines(treat_density, lty=2)
     # cumulative distribution
-    plot(ecdf(control[[predictors[ii]]]), lty=1)
+    ks = ks.test(control_yvals, treatment_yvals)
+    plot(ecdf(control[[predictors[ii]]]), lty=1, xlab=predictors[[ii]], ylab='cumulative distribution', main=paste0('KS statistic: ', round(ks$statistic, 3), ' p-value: ', round(ks$p.value, 5)))
     lines(ecdf(treatment[[predictors[ii]]]), lty=2)
 }
 
