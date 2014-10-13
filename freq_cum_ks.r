@@ -32,6 +32,26 @@ treat_val = 'True'
 control_val = 'False'
 predictors = c('Reg_Gender', 'Reg_GPA')
 
+# config learning communities 2
+version = 'lc2'
+ifile = 'lc2_pairs.csv'
+treat_col = 'treat'
+pairs_col = 'group'
+treat_val = 1
+control_val = 0
+predictors = c("sex","ethnic","citizen")
+predictors = c("stt","credits","parents","income")
+
+# config learning communities 2 with Chris's method
+version = 'lc2_chris'
+ifile = 'lc2_pairs_chris.csv'
+treat_col = 'treat'
+pairs_col = 'group'
+treat_val = 1
+control_val = 0
+predictors = c("sex","ethnic","citizen")
+predictors = c("stt","credits","parents","income")
+
 idata = read.csv(ifile)
 temp = idata
 cat('sanity', table(as.character(table(temp[[pairs_col]]))), '\n')  # validate these are all pairs
