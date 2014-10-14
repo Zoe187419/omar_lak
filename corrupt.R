@@ -1,6 +1,6 @@
 
 a_num = 1000
-b_num = 100
+b_num = 1000
 c_num = 1000
 a_mean = 0
 b_mean = 20

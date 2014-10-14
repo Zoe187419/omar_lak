@@ -2,7 +2,7 @@
 #   1) translate all data sets to one which has data for all participants
 #   2) idenitfy the treatment and controls (add column marker) 
 #       - may shrink dataset
-#       - allows for null distribution
+#       - allows for null distribution (IGNORING THIS)
 #   3) create matched dataset (mark treatment and matched control) 
 #       - may shrink dataset
 #       - allows for pair swap null distribution
