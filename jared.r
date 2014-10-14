@@ -79,6 +79,19 @@ predictors = c('Sex', 'ethnic', 'citizen', 'parents', 'income')
 prog_formula = paste0(dep_var_col, ' ~ ', paste(predictors, collapse=' + ' ) )
 prop_formula = paste0('factor(', treat_col, ') ~ ', paste(predictors, collapse=' + ' ) )
 
+# config learning communities
+version = 'lc2'
+ifile = "../data_lak_2015/input-new.csv"
+treat_col = 'treat'
+treat_val = 1
+control_val = 0
+dep_var_col = 'gpa'
+# QUESTION: do binary trees work to predict continuous variables?
+# if so is it just by making it into lots of categorical bins?
+predictors = c("sex","ethnic","citizen","stt","credits","parents","income")
+prog_formula = paste0(dep_var_col, ' ~ ', paste(predictors, collapse=' + ' ) )
+prop_formula = paste0('factor(', treat_col, ') ~ ', paste(predictors, collapse=' + ' ) )
+
 # config problem roulette exam 1
 version = 'pr1'
 ifile = "../data_lak_2015/pr_lak_exam1.csv"
@@ -90,19 +103,6 @@ dep_var_col = 'Exam1_100'
 # QUESTION: what if we just want to make prediction among users, ignoring control?
 # if so is it just by making it into lots of categorical bins?
 predictors = c('Reg_Gender', 'Reg_GPA')
-prog_formula = paste0(dep_var_col, ' ~ ', paste(predictors, collapse=' + ' ) )
-prop_formula = paste0('factor(', treat_col, ') ~ ', paste(predictors, collapse=' + ' ) )
-
-# config learning communities
-version = 'lc2'
-ifile = "../data_lak_2015/input-new.csv"
-treat_col = 'treat'
-treat_val = 1
-control_val = 0
-dep_var_col = 'gpa'
-# QUESTION: do binary trees work to predict continuous variables?
-# if so is it just by making it into lots of categorical bins?
-predictors = c("sex","ethnic","citizen","stt","credits","parents","income")
 prog_formula = paste0(dep_var_col, ' ~ ', paste(predictors, collapse=' + ' ) )
 prop_formula = paste0('factor(', treat_col, ') ~ ', paste(predictors, collapse=' + ' ) )
 
