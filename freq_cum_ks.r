@@ -43,8 +43,8 @@ predictors = c("sex","ethnic","citizen")
 predictors = c("stt","credits","parents","income")
 
 # config learning communities 2 with Chris's method
-version = 'lc2_chris'
-ifile = 'lc2_pairs_chris.csv'
+version = 'lc2'
+ifile = "../data_lak_2015/input-new.csv"
 treat_col = 'treat'
 pairs_col = 'group'
 treat_val = 1

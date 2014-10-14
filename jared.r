@@ -9,45 +9,39 @@ options(digits = 3)
 set.seed(80)
 sessionInfo()
 
-# config problem roulette exam 2
-version = 'pr3'
-ifile = "../data_lak_2015/pr_lak_exam3.csv"
+# config problem roulette with ecoach
+version = 'pr_ec'
+ifile = "../data_lak_2015/pr_lak_ecoach.csv"
 treat_col = 'tried_xxx'
-treat_val = 'True'
-control_val = 'False'
-dep_var_col = 'Exam3_200'
-# QUESTION: do binary trees work to predict continuous variables?
-# QUESTION: what if we just want to make prediction among users, ignoring control?
-# if so is it just by making it into lots of categorical bins?
-predictors = c('Reg_Gender', 'Reg_GPA')
-prog_formula = paste0(dep_var_col, ' ~ ', paste(predictors, collapse=' + ' ) )
-prop_formula = paste0('factor(', treat_col, ') ~ ', paste(predictors, collapse=' + ' ) )
-
-# config problem roulette exam 2
-version = 'pr2'
-ifile = "../data_lak_2015/pr_lak_exam2.csv"
-treat_col = 'tried_xxx'
-treat_val = 'True'
-control_val = 'False'
-dep_var_col = 'Exam2_100'
-# QUESTION: do binary trees work to predict continuous variables?
-# QUESTION: what if we just want to make prediction among users, ignoring control?
-# if so is it just by making it into lots of categorical bins?
-predictors = c('Reg_Gender', 'Reg_GPA')
-prog_formula = paste0(dep_var_col, ' ~ ', paste(predictors, collapse=' + ' ) )
-prop_formula = paste0('factor(', treat_col, ') ~ ', paste(predictors, collapse=' + ' ) )
-
-# config problem roulette exam 1
-version = 'pr1'
-ifile = "../data_lak_2015/pr_lak_exam1.csv"
-treat_col = 'tried_xxx'
-treat_val = 'True'
-control_val = 'False'
+treat_val = '1'
+control_val = '0'
 dep_var_col = 'Exam1_100'
-# QUESTION: do binary trees work to predict continuous variables?
-# QUESTION: what if we just want to make prediction among users, ignoring control?
 # if so is it just by making it into lots of categorical bins?
-predictors = c('Reg_Gender', 'Reg_GPA')
+predictors = c("Reg_Gender","goal_grade","grade_confidence","interest","prev_chem","math_confidence")
+prog_formula = paste0(dep_var_col, ' ~ ', paste(predictors, collapse=' + ' ) )
+prop_formula = paste0('factor(', treat_col, ') ~ ', paste(predictors, collapse=' + ' ) )
+
+# config problem roulette with both
+version = 'pr_both'
+ifile = "../data_lak_2015/pr_lak_both.csv"
+treat_col = 'tried_xxx'
+treat_val = '1'
+control_val = '0'
+dep_var_col = 'Exam1_100'
+# if so is it just by making it into lots of categorical bins?
+predictors = c("Reg_GPA","Reg_Gender","goal_grade","grade_confidence","interest","prev_chem","math_confidence")
+prog_formula = paste0(dep_var_col, ' ~ ', paste(predictors, collapse=' + ' ) )
+prop_formula = paste0('factor(', treat_col, ') ~ ', paste(predictors, collapse=' + ' ) )
+
+# config problem roulette with reg_gpa
+version = 'pr_gpa'
+ifile = "../data_lak_2015/pr_lak_gpa.csv"
+treat_col = 'tried_xxx'
+treat_val = '1'
+control_val = '0'
+dep_var_col = 'Exam1_100'
+# if so is it just by making it into lots of categorical bins?
+predictors = c("Reg_GPA","Reg_Gender")
 prog_formula = paste0(dep_var_col, ' ~ ', paste(predictors, collapse=' + ' ) )
 prop_formula = paste0('factor(', treat_col, ') ~ ', paste(predictors, collapse=' + ' ) )
 
@@ -55,27 +49,10 @@ prop_formula = paste0('factor(', treat_col, ') ~ ', paste(predictors, collapse='
 version = 'ec'
 ifile = "../data_lak_2015/mcdb2.csv"
 treat_col = 'usage.ratio_xxx'
-treat_val = 'True'
-control_val = 'False'
+treat_val = '1'
+control_val = '0'
 dep_var_col = 'Total.Points'
-# QUESTION: do binary trees work to predict continuous variables?
-# if so is it just by making it into lots of categorical bins?
-# QUESTION: is it ok to use data available only for treatment
-# when predicting the propensity
-predictors = c('Reg_Gender', 'Reg_GPA', 'Reg_Acad_Level')
-prog_formula = paste0(dep_var_col, ' ~ ', paste(predictors, collapse=' + ' ) )
-prop_formula = paste0('factor(', treat_col, ') ~ ', paste(predictors, collapse=' + ' ) )
-
-# config learning communities
-version = 'lc'
-ifile = "../data_lak_2015/learning_communities2.csv"
-treat_col = 'treat'
-treat_val = 1
-control_val = 0
-dep_var_col = 'CUM_GPA'
-# QUESTION: do binary trees work to predict continuous variables?
-# if so is it just by making it into lots of categorical bins?
-predictors = c('Sex', 'ethnic', 'citizen', 'parents', 'income')
+predictors = c("AP_Bio","AP_Chem","Attendance_Anticipated","Confidence","Goal_Grade","Reason__Concentration_req","Reason__Grad_req","Reason__Interest","Reg_Acad_Level","Reg_GPA","Reg_Gender","SLC_Enrolled","Subject_Interest")
 prog_formula = paste0(dep_var_col, ' ~ ', paste(predictors, collapse=' + ' ) )
 prop_formula = paste0('factor(', treat_col, ') ~ ', paste(predictors, collapse=' + ' ) )
 
@@ -86,27 +63,11 @@ treat_col = 'treat'
 treat_val = 1
 control_val = 0
 dep_var_col = 'gpa'
-# QUESTION: do binary trees work to predict continuous variables?
-# if so is it just by making it into lots of categorical bins?
 predictors = c("sex","ethnic","citizen","stt","credits","parents","income")
 prog_formula = paste0(dep_var_col, ' ~ ', paste(predictors, collapse=' + ' ) )
 prop_formula = paste0('factor(', treat_col, ') ~ ', paste(predictors, collapse=' + ' ) )
 
-# config problem roulette exam 1
-version = 'pr1'
-ifile = "../data_lak_2015/pr_lak_exam1.csv"
-treat_col = 'tried_xxx'
-treat_val = 'True'
-control_val = 'False'
-dep_var_col = 'Exam1_100'
-# QUESTION: do binary trees work to predict continuous variables?
-# QUESTION: what if we just want to make prediction among users, ignoring control?
-# if so is it just by making it into lots of categorical bins?
-predictors = c('Reg_Gender', 'Reg_GPA')
-prog_formula = paste0(dep_var_col, ' ~ ', paste(predictors, collapse=' + ' ) )
-prop_formula = paste0('factor(', treat_col, ') ~ ', paste(predictors, collapse=' + ' ) )
-
-##################################################################################
+#################################################################################
 # configs above here
 ##################################################################################
 
@@ -187,7 +148,7 @@ for(ii in names(table(fm.1.1)))
     pairings = rbind(pairings, pair1)
     pairings = rbind(pairings, pair2)
 }
-write.csv(pairings, file = paste0(version, "_pairs.csv"))
+write.csv(pairings, file = paste0('omar_', version, "_pairs.csv"))
 
 dev.new()
 control_progs = pairings[which(pairings[[treat_col]] == control_val),]$prog.scores
